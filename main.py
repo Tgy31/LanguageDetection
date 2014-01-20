@@ -20,6 +20,8 @@ testFiles=[filename for filename in testFiles if filename[0] != '.']
 print "Language samples : ", languageFiles
 print "Files to test : ", testFiles
 
+resultMatrix = []
+
 for testFile in testFiles:
     print "\n\n--> ", testFile
     testText = open('Tests/'+testFile).read()
