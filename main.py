@@ -28,10 +28,18 @@ for testFile in testFiles:
     testText = open('Tests/'+testFile).read()
     testStart = datetime.datetime.now()
     testNGram = NGram(testText, n)
+    total = 0
+    mini = 100000000
     for languageFile in languageFiles:
         languageText = open('Samples/'+languageFile).read()
         languageNGram = NGram(languageText, n)
-        print " ", languageFile, " : ", (languageNGram - testNGram)
+        diff = (languageNGram - testNGram)
+        total += diff
+        if diff < mini:
+            mini = diff
+            languageFound = languageFile
+        print " ", languageFile, " : ", diff
+    print "\n Result = ", languageFound, " with ", (1 - mini/total)*100, "%"
     
     testEnd = datetime.datetime.now()
     print "\n  Time : ", (testEnd - testStart)
