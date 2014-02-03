@@ -39,7 +39,7 @@ for testFile in testFiles:
             mini = diff
             languageFound = languageFile
         print " ", languageFile, " : ", diff
-    print "\n Result = ", languageFound, " with ", (1 - mini/total)*100, "%"
+    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     
     testEnd = datetime.datetime.now()
     print "\n  Time : ", (testEnd - testStart)
@@ -63,7 +63,7 @@ for testFile in testFiles:
             mini = diff
             languageFound = languageFile
         print " ", languageFile, " : ", diff
-    print "\n Result = ", languageFound, " with ", (1 - mini/total)*100, "%"
+    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     
     testEnd = datetime.datetime.now()
     print "\n  Time : ", (testEnd - testStart)
