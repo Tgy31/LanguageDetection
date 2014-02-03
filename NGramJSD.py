@@ -36,8 +36,7 @@ class NGramJSD(object):
 			raise TypeError("Can't compare NGramJSD objects of different size.")
 
 		JSD = 0
-		duplicateGrams = set(self.table.keys()) - set(other.table.keys())
-		grams = list(set(self.table.keys() + other.table.keys()) - duplicateGrams)
+		grams = list(set(self.table.keys() + other.table.keys()))
 
 		for k in grams:
 			P = float(self.table.get(k, 0.0000001))

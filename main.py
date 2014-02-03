@@ -2,6 +2,7 @@
 
 from NGram import NGram
 from NGramJSD import NGramJSD
+from NGramJSD2 import NGramJSD2
 import datetime
 import sys, stat, os
 
@@ -39,9 +40,9 @@ for testFile in testFiles:
             mini = diff
             languageFound = languageFile
         print " ", languageFile, " : ", diff
-    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     
     testEnd = datetime.datetime.now()
+    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     print "\n  Time : ", (testEnd - testStart)
 
 print "\n\n"
@@ -63,7 +64,31 @@ for testFile in testFiles:
             mini = diff
             languageFound = languageFile
         print " ", languageFile, " : ", diff
-    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     
     testEnd = datetime.datetime.now()
+    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
+    print "\n  Time : ", (testEnd - testStart)
+
+print "\n\n"
+print "------- Jenson & Shannon Way Improved ---------"
+
+for testFile in testFiles:
+    print "\n\n--> ", testFile
+    testText = open('Tests/'+testFile).read()
+    testStart = datetime.datetime.now()
+    testNGram = NGramJSD2(testText, n)
+    total = 0
+    mini = 100000000
+    for languageFile in languageFiles:
+        languageText = open('Samples/'+languageFile).read()
+        languageNGram = NGramJSD2(languageText, n)
+        diff = (languageNGram - testNGram)
+        total += diff
+        if diff < mini:
+            mini = diff
+            languageFound = languageFile
+        print " ", languageFile, " : ", diff
+    
+    testEnd = datetime.datetime.now()
+    print "\n Result = ", languageFound, " with ", (1 - (mini * len(languageFiles)/total))*100, "%"
     print "\n  Time : ", (testEnd - testStart)
