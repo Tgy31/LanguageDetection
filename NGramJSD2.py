@@ -23,12 +23,12 @@ class NGramJSD2(object):
 		self.length = sum([x * x for x in self.table.values()]) ** 0.5
 		return self.length
 
+	def histo_diff(self, other):
+		grams = list(set(self.table.keys()) & set(other.table.keys()))
+		K = len(self.table.keys()) - len(grams)
+		return K
+
 	def __sub__(self, other):
-		""" Find the difference between two NGram objects by finding the cosine
-		of the angle between the two vector representations of the table of
-		N-Grams. Return a float value between 0 and 1 where 0 indicates that
-		the two NGrams are exactly the same.
-		"""
 		if not isinstance(other, NGramJSD2):
 			raise TypeError("Can't compare NGram with non-NGram object.")
 
@@ -36,7 +36,7 @@ class NGramJSD2(object):
 			raise TypeError("Can't compare NGramJSD objects of different size.")
 
 		JSD = 0
-		grams = list(set(self.table.keys() + other.table.keys()))
+		grams = list(set(self.table.keys()) & set(other.table.keys()))
 
 		for k in grams:
 			P = float(self.table.get(k, 0.0000001))

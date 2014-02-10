@@ -38,7 +38,7 @@ class NGram(object):
 		for k in self.table:
 			total += self.table[k] * other.table.get(k, 0)
 
-		return 1.0 - (float(total) / (float(self.length) * float(other.length)))
+		return (float(total) / (float(self.length) * float(other.length)))
 
 	def find_match(self, languages):
 		return min(languages, lambda n: self - n)

@@ -24,11 +24,6 @@ class NGramJSD(object):
 		return self.length
 
 	def __sub__(self, other):
-		""" Find the difference between two NGram objects by finding the cosine
-		of the angle between the two vector representations of the table of
-		N-Grams. Return a float value between 0 and 1 where 0 indicates that
-		the two NGrams are exactly the same.
-		"""
 		if not isinstance(other, NGramJSD):
 			raise TypeError("Can't compare NGram with non-NGram object.")
 
@@ -39,8 +34,8 @@ class NGramJSD(object):
 		grams = list(set(self.table.keys() + other.table.keys()))
 
 		for k in grams:
-			P = float(self.table.get(k, 0.0000001))
-			Q = float(other.table.get(k, 0.0000001))
+			P = float(self.table.get(k, 1))
+			Q = float(other.table.get(k, 1))
 			#print P, " - ", Q
 			JSD += P * math.log(2 * Q / (P + Q))
 			JSD += Q * math.log(2 * P / (P + Q))
